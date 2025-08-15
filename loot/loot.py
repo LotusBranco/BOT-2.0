@@ -7,10 +7,11 @@ import pyautogui
 is_running_loot = False
 
 # Lista com os caminhos para as imagens dos itens que queremos coletar
+# Mantenha essa lista atualizada com os nomes de todos os arquivos de imagem
 LOOT_ITEM_PATHS = [
     'loot/image/small_stones.png',
     'loot/image/water_gems.png',
-    'loot/image/water_gems_2.png'  # Adicione o nome da sua nova imagem aqui
+    'loot/image/water_gems_2.png'
 ]
 
 def start_loot_automation(status_label, start_button, stop_button):
@@ -39,26 +40,17 @@ def loot_automation_loop():
     global is_running_loot
     
     while is_running_loot:
-        item_found = False
         for item_path in LOOT_ITEM_PATHS:
-            try:
-                # Procura por cada item na lista
-                item_location = pyautogui.locateOnScreen(item_path, confidence=0.7)
+            # Procura por cada item na lista
+            item_location = pyautogui.locateOnScreen(item_path, confidence=0.7)
 
-                if item_location:
-                    # Se um item foi encontrado, clica nele e sai do loop interno
-                    center_x, center_y = pyautogui.center(item_location)
-                    pyautogui.click(center_x, center_y)
-                    print(f"Item '{item_path}' encontrado e clicado em: X={center_x}, Y={center_y}")
-                    item_found = True
-                    break # Sai do loop 'for' para recomeçar a busca do zero
-                
-            except pyautogui.PyAutoGUIException as e:
-                print(f"Erro ao procurar a imagem: {e}")
-            
-        if not item_found:
-            print("Nenhum item encontrado. Procurando novamente...")
-            
+            if item_location:
+                # Se um item foi encontrado, clica nele e sai do loop interno
+                center_x, center_y = pyautogui.center(item_location)
+                pyautogui.click(center_x, center_y)
+                print(f"Item '{item_path}' encontrado e clicado em: X={center_x}, Y={center_y}")
+                break  # Sai do loop 'for' para recomeçar a busca do zero
+        
         # Pequena pausa para não sobrecarregar a CPU
         time.sleep(1)
         
