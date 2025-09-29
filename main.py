@@ -3,6 +3,7 @@ from aut_atk.aut_atk import create_automation_frame
 from troca_aut.troca_aut import create_troca_frame
 from all.all import create_all_frame
 from loot.loot import create_loot_frame
+from farm.farm import create_farm_frame  # Importa a nova funcionalidade
 
 def show_frame(frame):
     """Função para mostrar um frame e esconder os outros."""
@@ -21,13 +22,13 @@ container.grid_columnconfigure(0, weight=1)
 # --- Criação dos Frames ---
 menu_frame = tk.Frame(container)
 
-# Passa a função show_frame e o menu_frame para as funções de criação
 automation_frame = create_automation_frame(container, show_frame, menu_frame)
 troca_frame = create_troca_frame(container, show_frame, menu_frame)
 all_frame = create_all_frame(container, show_frame, menu_frame)
 loot_frame = create_loot_frame(container, show_frame, menu_frame)
+farm_frame = create_farm_frame(container, show_frame, menu_frame)  # Cria o novo frame
 
-for frame in (menu_frame, automation_frame, troca_frame, all_frame, loot_frame):
+for frame in (menu_frame, automation_frame, troca_frame, all_frame, loot_frame, farm_frame):
     frame.grid(row=0, column=0, sticky="nsew")
 
 # --- Conteúdo do Menu Principal ---
@@ -48,6 +49,10 @@ all_button.pack(pady=10)
 
 loot_button = tk.Button(menu_content_frame, text="Lootear", command=lambda: show_frame(loot_frame), width=20, height=2, bg="orange")
 loot_button.pack(pady=10)
+
+# Novo botão para a funcionalidade de "farm"
+farm_button = tk.Button(menu_content_frame, text="Farm", command=lambda: show_frame(farm_frame), width=20, height=2, bg="yellow")
+farm_button.pack(pady=10)
 
 show_frame(menu_frame)
 
