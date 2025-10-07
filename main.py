@@ -3,7 +3,8 @@ from aut_atk.aut_atk import create_automation_frame
 from troca_aut.troca_aut import create_troca_frame
 from all.all import create_all_frame
 from loot.loot import create_loot_frame
-from farm.farm import create_farm_frame  # Importação correta do novo módulo
+from farm.farm import create_farm_frame
+from sword.sword import create_sword_frame # Importação da nova funcionalidade 'sword'
 
 def show_frame(frame):
     """Função para mostrar um frame e esconder os outros."""
@@ -27,8 +28,9 @@ troca_frame = create_troca_frame(container, show_frame, menu_frame)
 all_frame = create_all_frame(container, show_frame, menu_frame)
 loot_frame = create_loot_frame(container, show_frame, menu_frame)
 farm_frame = create_farm_frame(container, show_frame, menu_frame)
+sword_frame = create_sword_frame(container, show_frame, menu_frame) # Criação do frame 'sword'
 
-for frame in (menu_frame, automation_frame, troca_frame, all_frame, loot_frame, farm_frame):
+for frame in (menu_frame, automation_frame, troca_frame, all_frame, loot_frame, farm_frame, sword_frame):
     frame.grid(row=0, column=0, sticky="nsew")
 
 # --- Conteúdo do Menu Principal ---
@@ -52,6 +54,9 @@ loot_button.pack(pady=10)
 
 farm_button = tk.Button(menu_content_frame, text="Farm", command=lambda: show_frame(farm_frame), width=20, height=2, bg="yellow")
 farm_button.pack(pady=10)
+
+sword_button = tk.Button(menu_content_frame, text="Sword", command=lambda: show_frame(sword_frame), width=20, height=2, bg="purple", fg="white")
+sword_button.pack(pady=10)
 
 show_frame(menu_frame)
 
